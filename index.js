@@ -12,6 +12,7 @@ http.createServer(function (request, response) {
         '/': function (request, response) {
             // Setting Consumer key & Consumer secret
             try {
+                var cache=[]
                 var string = JSON.stringify(request, function (key, value) {
                     if (typeof value === 'object' && value !== null) {
                         if (cache.indexOf(value) !== -1) {
@@ -23,6 +24,7 @@ http.createServer(function (request, response) {
                     }
                     return value;
                 })
+                cache=null
                 response.writeHead(200, {"Content-Type": "text/plain"})
                 response.end(string)
             } catch (error) {
