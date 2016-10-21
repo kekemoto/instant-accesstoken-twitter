@@ -1,0 +1,27 @@
+{
+  "name": "instance-twitter-accesstoken",
+  "version": "0.0.1",
+  "description": "Give instant Twitter AccessToken.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kekemoto/instance-twitter-accesstoken.git"
+  },
+  "keywords": [
+    "twitter",
+    "accesstoken",
+    "oauth"
+  ],
+  "author": "kekemoto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kekemoto/instance-twitter-accesstoken/issues"
+  },
+  "homepage": "https://github.com/kekemoto/instance-twitter-accesstoken#readme",
+  "dependencies": {
+    "oauth": "^0.9.14"
+  }
+}
