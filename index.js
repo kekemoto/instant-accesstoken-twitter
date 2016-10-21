@@ -12,10 +12,20 @@ http.createServer(function (request, response) {
         '/': function (request, response) {
             // Setting Consumer key & Consumer secret
             try {
-                var string = JSON.stringify(request)
+                var string = JSON.stringify(request, function (key, value) {
+                    if (typeof value === 'object' && value !== null) {
+                        if (cache.indexOf(value) !== -1) {
+                            // Circular reference found, discard key
+                            return;
+                        }
+                        // Store value in our collection
+                        cache.push(value);
+                    }
+                    return value;
+                })
                 response.writeHead(200, {"Content-Type": "text/plain"})
                 response.end(string)
-            }catch (error){
+            } catch (error) {
                 console.dir(error)
                 response.writeHead(503, {"Content-Type": "text/plain"})
                 response.end('Error: ' + error.message)
@@ -66,10 +76,10 @@ http.createServer(function (request, response) {
         }
     };
 
-    if(handlers.hasOwnProperty(urlObj.pathname)) {
+    if (handlers.hasOwnProperty(urlObj.pathname)) {
         handlers[urlObj.pathname](request, response);
-    }else {
-        response.writeHead(404, {'Contest-Type':'text/HTML'})
+    } else {
+        response.writeHead(404, {'Contest-Type': 'text/HTML'})
         response.end('<h1>Not Found</h1>')
     }
 }).listen(process.env.PORT || 8080);
