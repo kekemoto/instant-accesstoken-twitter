@@ -11,9 +11,9 @@ http.createServer(function (request, response) {
     var handlers = {
         '/': function (request, response) {
             // Setting Consumer key & Consumer secret
-            console.log(request)
-            response.writeHead(200, {"Conten-Type": "text/plain"})
+            response.writeHead(200, {"Content-Type": "text/plain"})
             response.end(JSON.stringify(request))
+            console.log(request)
         },
         '/url': function (request, response) {
             // Make url for request Twitter window
@@ -29,7 +29,7 @@ http.createServer(function (request, response) {
             oauth.getOAuthRequestToken(function (error, oAuthToken, oAuthTokenSecret, results) {
                 if (error) {
                     console.error(error)
-                    response.writeHead(503, {"Conten-Type": "text/plain"})
+                    response.writeHead(503, {"Content-Type": "text/plain"})
                     response.end(JSON.stringify(error))
                 }
                 var authURL = 'https://twitter.com/oauth/authenticate?oauth_token=' + oAuthToken;
