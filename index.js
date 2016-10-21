@@ -11,8 +11,15 @@ http.createServer(function (request, response) {
     var handlers = {
         '/': function (request, response) {
             // Setting Consumer key & Consumer secret
-            response.writeHead(200, {"Content-Type": "text/plain"})
-            response.end(JSON.stringify(request))
+            try {
+                var string = JSON.stringify(request)
+                response.writeHead(200, {"Content-Type": "text/plain"})
+                response.end(string)
+            }catch (e){
+                console.dir(e)
+                response.writeHead(503, {"Content-Type": "text/plain"})
+                response.end('Error')
+            }
             console.log(request)
         },
         '/url': function (request, response) {
