@@ -15,10 +15,10 @@ http.createServer(function (request, response) {
                 var string = JSON.stringify(request)
                 response.writeHead(200, {"Content-Type": "text/plain"})
                 response.end(string)
-            }catch (e){
-                console.dir(e)
+            }catch (error){
+                console.dir(error)
                 response.writeHead(503, {"Content-Type": "text/plain"})
-                response.end('Error')
+                response.end('Error: ' + error.message)
             }
             console.log(request)
         },
